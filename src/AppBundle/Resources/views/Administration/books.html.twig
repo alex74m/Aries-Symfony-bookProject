@@ -1,0 +1,41 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:Administration:administrationBooks{% endblock title %}
+  
+{% block headerTitle %}Welcome to the Administration:administrationBooks page{% endblock headerTitle %}
+
+{% block content %}
+
+  <div>
+    {% include '@App/Include/Account/menu_admin.html.twig' %}
+  </div> 
+
+  <div>
+		{{ form_start(bookForm, {'attr': {'role': 'form'}}) }}
+ 
+			<div class="form-group row">
+				{{ form_label(bookForm.title, "Titre du livre", {'label_attr': {'class': 'col-lg-3 col-form-label form-control-label'}}) }}
+				{{ form_errors(bookForm.title) }}
+				<div class="col-lg-9">
+					{{ form_row(bookForm.title, {'attr': {'class': 'form-control', 'placeholder': 'Choisissez un titre de livre', 'pattern':'.{1,200}', 'title': '1 caracteres minimum'}}) }}
+				</div>
+			</div>
+			<div class="form-group row">
+				{{ form_label(bookForm.author, "Auteur du livre", {'label_attr': {'class': 'col-lg-3 col-form-label form-control-label'}}) }}
+				{{ form_errors(bookForm.author) }}
+				<div class="col-lg-9">
+					{{ form_row(bookForm.author, {'attr': {'class': 'form-control', 'placeholder': 'Auteur du livre', 'pattern':'.{0,200}', 'title': '200 caractères maximum'}}) }}
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-4">
+					{{ form_widget(bookForm.save, {'attr': {'class': 'form-control btn btn-primary'}}) }}
+				</div>
+			</div>
+
+		{{ form_row(bookForm._token) }}
+		{{ form_end(bookForm) }}
+  </div>
+
+{% endblock content %}

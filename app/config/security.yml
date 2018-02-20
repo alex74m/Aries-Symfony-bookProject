@@ -1,0 +1,53 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
+    role_hierarchy:
+        # Si le boolean "verify_email_after_registration" dans le fichier "parameters.yml" est = true
+        # alors ce rôle sera attribué aux nouveaux utilisateurs le temps qu'ils vérifient leur adresse email avant de pouvoir se connecter
+        ROLE_USER_PENDING: [ROLE_USER_PENDING]
+        ROLE_USER: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_ADMIN]
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        user_provider:
+          entity:
+            class: AppBundle:User
+            property: email
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        # Private area
+        private:
+            access_denied_url: /private/accessdenied
+            pattern:   ^/
+            anonymous: true
+            logout_on_user_change: true
+            provider:  user_provider
+            form_login:
+                check_path: login
+                login_path: login
+                default_target_path: dashboard
+            logout:
+                path:   logout
+                target: /
+            anonymous:    true
+            
+    access_control:
+    # require ROLE_ADMIN for /private/administration
+    - { path: ^/private/administration, roles: [ROLE_ADMIN] }
+    # require ROLE_USER or ROLE_USER_PENDING for /private/denied
+    - { path: ^/private/accessdenied, roles: [ROLE_USER, ROLE_USER_PENDING] }   
+    # require ROLE_USER for /private
+    - { path: ^/private, roles: ROLE_USER }     
+    # no auth needed for /
+    - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY } 

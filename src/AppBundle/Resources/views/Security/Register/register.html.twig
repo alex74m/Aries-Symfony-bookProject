@@ -1,0 +1,20 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:Home:home{% endblock %}
+
+{% block headerTitle %}Inscription{% endblock headerTitle %}
+	
+{% block content %}
+	
+
+  {{ form_start(registerForm) }}
+  {{ form_row(registerForm.email) }}
+  {{ form_row(registerForm.plainPassword.first) }}
+  {{ form_row(registerForm.plainPassword.second) }}
+  {{ form_row(registerForm.firstName) }}
+  {{ form_row(registerForm.lastName) }}
+  <button type="submit">S'inscrire!</button>
+  {{ form_end(registerForm) }}
+
+    
+{% endblock content %}

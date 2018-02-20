@@ -1,0 +1,29 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:Home:home{% endblock %}
+
+{% block headerTitle %}Login{% endblock headerTitle %}
+  
+{% block content %}
+  
+    
+  {% if error %}
+    {% if error.code == 0 %}
+      <div class="alert alert-danger">Mauvais identifiants</div>
+    {% endif %}
+  {% endif %}
+
+  <form action="{{ path('login') }}" method="post">
+    <label for="username">Email:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" />
+
+    <button type="submit">login</button>
+  </form>
+  <a href="{{ path('lostpassword') }}">Mot de passe perdu</a><br>
+  <a href="{{ path('register') }}">Créer un compte</a>  
+
+   
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:User:userEmail{% endblock title %}
+
+{% block headerTitle %}Welcome to the User:userEmail page{% endblock headerTitle %}
+
+{% block content %}
+
+  <div>
+    {% include '@App/Include/Account/menu_user.html.twig' %}
+    Gérez vos données utilisateurs grâce aux liens ci-dessus
+  </div>
+
+  {{form(changeEmailForm)}}
+
+ 
+{% endblock content %}

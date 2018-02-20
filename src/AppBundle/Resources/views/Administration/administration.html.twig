@@ -1,0 +1,16 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:Administration:administration{% endblock title %}
+
+{% block headerTitle %}Welcome to the Administration:administration page{% endblock headerTitle %}
+
+{% block content %}
+
+
+  <div>
+    {% include '@App/Include/Account/menu_admin.html.twig' %}
+    Si vous êtes ici, c'est que vous êtes un Admin ! Utilisez les liens ci-dessus pour naviguer dans les fonctionnalités réservées aux Admins.
+  </div>
+
+ 
+{% endblock content %}

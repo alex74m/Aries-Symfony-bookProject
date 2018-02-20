@@ -1,0 +1,30 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+ <div class="container">
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+       <span class="sr-only"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+     <a class="navbar-brand" href="{{ path('home') }}"><img id="logo-website" src="{{asset('Public/images/design/logo.png')}}" {% if app.user %}style="background-color: blue;"{% endif %} title="logo" alt="logo"></a>
+   </div>
+   <div id="navbar" class="collapse navbar-collapse">
+     <ul class="nav navbar-nav">
+       <li {% if app.request.attributes.get('_route') == 'home' %}class="active"{% endif %}><a href="{{ path('home') }}">Homepage</a></li>
+      {% if app.user %}
+       <li {% if app.request.attributes.get('_route') == 'dashboard' %}class="active"{% endif %}><a href="{{ path('dashboard') }}">Dashboard</a></li>
+      {% endif %}
+          {% if app.user %}
+            <li {% if app.request.attributes.get('_route') in ['user', 'user_infos', 'userpassword', 'useremail'] %}class="active"{% endif %}><a href="{{ path('user') }}">User</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+              <li {% if app.request.attributes.get('_route') in ['administration','administrationusers','administrationbooks'] %}class="active"{% endif %}><a href="{{ path('administration') }}">Administration</a></li>
+            {% endif %}
+            <li {% if app.request.attributes.get('_route') == 'logout' %}class="active"{% endif %}><a href="{{ path('logout') }}">Logout</a></li>
+          {% else %}
+            <li {% if app.request.attributes.get('_route') == 'login' %}class="active"{% endif %}><a href="{{ path('login') }}">Login</a></li>
+          {% endif %}
+     </ul>
+   </div><!--/.nav-collapse -->
+ </div>
+</nav><!-- end navbar-->

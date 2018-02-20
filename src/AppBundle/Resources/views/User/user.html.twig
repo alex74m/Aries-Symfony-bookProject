@@ -1,0 +1,15 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:User:user{% endblock title %}
+	
+{% block headerTitle %}Welcome to the User:user page{% endblock headerTitle %}
+
+{% block content %}
+
+  <div>
+    {% include '@App/Include/Account/menu_user.html.twig' %}
+    Gérez vos données utilisateurs grâce aux liens ci-dessus
+  </div>
+  
+ 
+{% endblock content %}

@@ -1,0 +1,25 @@
+<ul class="nav navbar-nav menu-left">
+	<li {% if app.request.attributes.get('_route') == 'home' %}class="active"{% endif %}>
+		<a href="{{ path('home') }}">Home</a>
+	</li>
+	<br>
+	{% if app.user %}
+		<li {% if app.request.attributes.get('_route') == 'dashboard' %}class="active"{% endif %}>
+			<a href="{{ path('dashboard') }}">Dashboard</a>
+		</li>
+		<br>
+	{% endif %}
+	{% if app.user %}
+	<li {% if app.request.attributes.get('_route') in ['user', 'user_infos', 'userpassword', 'useremail'] %}class="active"{% endif %}>
+			<a href="{{ path('user') }}">User</a>
+	</li>
+	<br>
+	{% if is_granted('ROLE_ADMIN') %}
+		<li {% if app.request.attributes.get('_route') in ['administration','administrationusers','administrationbooks'] %}class="active"{% endif %}>
+			<a href="{{ path('administration') }}">Administration</a>
+		</li><br>
+	{% endif %}
+	<li {% if app.request.attributes.get('_route') == 'logout' %}class="active"{% endif %}>
+		<a href="{{ path('logout') }}">Logout</a></li><br>
+{% endif %}
+</ul>

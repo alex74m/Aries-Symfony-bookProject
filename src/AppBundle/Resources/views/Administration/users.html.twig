@@ -1,0 +1,107 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:Administration:administrationUsers{% endblock title %}
+
+	{% block headerTitle %}Welcome to the Administration:administrationUsers page{% endblock headerTitle %}
+
+		{% block content %}
+
+
+			<div>
+				{% include '@App/Include/Account/menu_admin.html.twig' %}
+			</div> 
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row text-center">
+						    <h2><strong>{{ listUsers.getTotalItemCount }}</strong> utilisateurs ont été trouvés</h2>
+						</div>
+						<div class="row text-center">
+							<h3>Search a member:</h3>
+						    <form action="{{path('administrationusers')}}" method="GET">
+						    	<input type="text" name="query" placeholder="Firstname or lastname">
+						    	<input type="submit">
+						    </form>
+						</div>
+						<div class="main-box no-header clearfix">
+							<div class="main-box-body clearfix">
+								<div class="table-responsive">
+									<table class="table user-list">
+										<thead>
+											<tr>
+												<th><span>User</span></th>
+												<th><span>Created</span></th><th class="text-center"><span>Status</span></th>
+												<th><span>Email</span></th>
+												<th><span>Mdp</span></th>
+												<th>Manager</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for user in listUsers %}
+												<tr>
+													<td> 
+														<img class="img-profil" src="{{asset('Public/images/uploads/avatar/default.jpg')}}" alt="photo profil {{user.firstname}}"> 
+														<br>
+														<a href="#" class="user-link">{{user.firstname}} {{user.lastname}}</a> 
+														<br>
+														<span class="user-subhead">
+															{% for role in user.roles %}
+														    		{% if role == 'ROLE_ADMIN' %}
+														    			Admin 
+														    		{% else %}
+														    			Member
+														    		{% endif %}
+															{% endfor %}
+														</span>
+													</td>
+													<td>
+														{{user.dateInscription|inscriptionDate}}
+													</td>
+													<td class="text-center">
+														{% for role in user.roles %}
+														 		{% if role == 'ROLE_USER_PENDING' %}
+														 			<span class="label label-default">pending</span>
+														 		{% elseif role == 'ROLE_USER' %}
+																	<span class="label label-success">active</span>
+																{% elseif role == 'ROLE_ADMIN' %}
+																	<span class="label label-primary">admin</span>
+														 		{% endif %}
+														{% endfor %}
+													</td>
+													<td> 
+														<a href="#">{{user.email}}</a>
+													</td>
+													<td>
+														<button data-toggle="tooltip" title="ah ah bien tenté !">See pwd</button>
+													</td>
+													<td>
+														<a href="#" class="user-table-link"> 
+															<span class="alert-warning"> 
+																<i class="glyphicon glyphicon-search"></i> 
+															</span> 
+														</a> 
+														<a href="#" class="user-table-link"> 
+															<span class="alert-success"> 
+																<i class="glyphicon glyphicon-pencil"></i> 
+															</span> 
+														</a> 
+														<a href="#" class="user-table-link"> 
+															<span class="alert-danger"> 
+																<i class="glyphicon glyphicon-remove"></i> 
+															</span> 
+														</a>
+													</td>
+												</tr>																				    
+											{% endfor %}
+										</tbody>
+									</table>
+									<div class="navigation">
+									    {{ knp_pagination_render(listUsers) }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+{% endblock content %}

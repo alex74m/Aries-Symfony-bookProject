@@ -1,0 +1,56 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:User:userInfos{% endblock title %}
+
+{% block headerTitle %}Welcome to the User:userInfos page{% endblock headerTitle %}
+
+{% block content %}
+
+  <div>
+    {% include '@App/Include/Account/menu_user.html.twig' %}
+    Gérez vos données utilisateurs grâce aux liens ci-dessus
+  </div>
+
+
+		{{ form_start(userInfosForm, {'attr': {'role': 'form'}}) }}
+ 
+			<div class="form-group row">
+				{{ form_label(userInfosForm.firstName, "Prénom", {'label_attr': {'class': 'col-lg-3 col-form-label form-control-label'}}) }}
+				{{ form_errors(userInfosForm.firstName) }}
+				<div class="col-lg-9">
+					{{ form_widget(userInfosForm.firstName, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+			<div class="form-group row">
+				{{ form_label(userInfosForm.lastName, "Nom", {'label_attr': {'class': 'col-lg-3 col-form-label form-control-label'}}) }}
+				{{ form_errors(userInfosForm.lastName) }}
+				<div class="col-lg-9">
+					{{ form_widget(userInfosForm.lastName, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+			<div class="form-group row">
+
+				{% if app.user.book is not null %} 
+					<span> <i class="glyphicon glyphicon-star"></i> Votre livre préféré actuel est : <strong>{{app.user.book.title}}</strong> {% if app.user.book.author is not null %} écrit par <strong>{{app.user.book.author}} </strong>{% endif %}</span> 
+				{% else %}
+					<span>Vous n'avez pas encore ajouté votre livre préféré ! </span> 
+				{% endif %}
+
+				{{ form_label(userInfosForm.book, "Votre livre préféré", {'label_attr': {'class': 'col-lg-3 col-form-label form-control-label'}}) }}
+				{{ form_errors(userInfosForm.book) }}				
+				<div class="col-lg-9">
+					{{ form_widget(userInfosForm.book, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-4">
+					{{ form_widget(userInfosForm.save, {'attr': {'class': 'form-control btn btn-primary'}}) }}
+				</div>
+			</div>
+
+		{{ form_row(userInfosForm._token) }}
+		{{ form_end(userInfosForm) }}
+
+ 
+{% endblock content %}

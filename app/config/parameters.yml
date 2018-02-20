@@ -1,0 +1,16 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: dm-symfony-aries
+    database_user: root
+    database_password: root
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_user: cdw2k18@gmail.com
+    mailer_password: plusdecafe
+    mailer_port: 587
+    mailer_encryption: tls
+    secret: kgf5gf6hg6f5hf5sd6sd9g65gdjhfskjfsdf9d5dfg6
+    locale: fr
+    verify_email_after_registration: true

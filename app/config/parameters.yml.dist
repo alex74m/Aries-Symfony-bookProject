@@ -1,0 +1,27 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: 127.0.0.1
+    database_port: ~
+    database_name: symfony
+    database_user: root
+    database_password: ~
+    # You should uncomment this if you want to use pdo_sqlite
+    #database_path: '%kernel.project_dir%/var/data/data.sqlite'
+
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_user: cdw2k18@gmail.com
+    mailer_password: plusdecafe
+    mailer_port: 587
+    mailer_encryption: tls
+
+    # A secret key that's used to generate certain security-related tokens
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+    locale: fr
+
+    # If true, an email is sent to the User, in order to check his email and change the ROLE_USER_PENDING to ROLE_USER
+    # If false, the User will be granted with ROLE_USER without validating his email
+    verify_email_after_registration: true

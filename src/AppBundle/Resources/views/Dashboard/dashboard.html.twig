@@ -1,0 +1,14 @@
+{% extends "@App/layout.html.twig" %}
+
+{% block title %}AppBundle:Dashboard:dashboard{% endblock title %}
+ 
+{% block headerTitle %}Welcome to the Dashboard:dashboard page{% endblock headerTitle %}
+
+{% block content %}
+
+  <div>
+    Bienvenue <b>{{app.user.lastname|capitalize}} {{app.user.firstname|capitalize}}</b>
+  </div>
+
+
+{% endblock content %}
